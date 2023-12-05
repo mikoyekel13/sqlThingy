@@ -21,6 +21,7 @@ function App() {
     schoolCode: "",
     password: "",
   });
+  const [classId, setclassId] = useState("");
 
   // useEffect(() => {
   //   try {
@@ -142,24 +143,46 @@ function App() {
   }
 
   function handleShow(name) {
-    try {
-      fetch(`http://localhost:3000/${name}`)
-        .then((res) => {
-          if (!res.ok) throw Error;
-          return res.json();
-        })
-        .then((res) => console.log(name, res))
-        .catch((e) => console.log(e));
-    } catch (e) {
-      console.log(e);
+    if (name === "id") {
+      try {
+        fetch(`http://localhost:3000/student/${classId}`)
+          .then((res) => {
+            if (!res.ok) throw Error;
+            return res.json();
+          })
+          .then((res) => console.log(name, res))
+          .catch((e) => console.log(e));
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      try {
+        fetch(`http://localhost:3000/${name}`)
+          .then((res) => {
+            if (!res.ok) throw Error;
+            return res.json();
+          })
+          .then((res) => console.log(name, res))
+          .catch((e) => console.log(e));
+      } catch (e) {
+        console.log(e);
+      }
     }
+  }
+
+  function handleclassId(e) {
+    setclassId(e.target.value);
+    console.log(classId);
   }
 
   return (
     <>
       <button onClick={() => handleShow("student")}>show students</button>
       <button onClick={() => handleShow("school")}>show schools</button>
-      <button>other show students that does nothing</button>
+      <input type="text" value={classId} onChange={(e) => handleclassId(e)} />
+      <button onClick={() => handleShow("id")}>
+        other show students that does nothing
+      </button>
 
       <hr />
       <input
