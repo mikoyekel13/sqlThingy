@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function App() {
   const [student, setStudent] = useState({
@@ -19,6 +19,7 @@ function App() {
   const [school, setSchool] = useState({
     name: "",
     schoolCode: "",
+    adminName: "",
     password: "",
   });
   const [classId, setclassId] = useState("");
@@ -267,6 +268,13 @@ function App() {
         value={school.schoolCode}
         onChange={(e) => handleSchool(e)}
         placeholder="school code..."
+      />
+      <input
+        type="text"
+        name="adminName"
+        value={school.adminName}
+        onChange={(e) => handleSchool(e)}
+        placeholder="admin name"
       />
       <input
         type="password"
