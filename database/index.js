@@ -3,8 +3,8 @@ const fs = require("node:fs");
 
 const con = mysql.createConnection({
   host: "localhost",
-  user: "yourusername",
-  password: "yourpassword",
+  user: "root",
+  password: "z10mz10m",
 });
 
 con.connect(function (err) {
@@ -18,10 +18,14 @@ con.connect(function (err) {
     if (err) throw err;
     console.log("Database created");
   });
+  con.query("use mydb", function (err, result) {
+    if (err) throw err;
+    console.log("Database used");
+  });
   fs.readdir("./entities", (err, files) => {
     if (err) throw err;
     for (let file of files) {
-      fs.readFile(file, (err, content) => {
+      fs.readFile(`./entities/${file}`, (err, content) => {
         if (err) throw err;
         const name = file.split(".")[0];
         const obj = JSON.parse(content);

@@ -1,6 +1,6 @@
 {
-  "id": "INT AUTO_INCREMENT",
+  "id": "INT AUTO_INCREMENT primary key",
   "grade": "VARCHAR(255)",
-  "index": "INT",
+  "class_num": "INT",
   "teacher_id": "INT"
 }
