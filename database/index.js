@@ -22,7 +22,7 @@ con.connect(function (err) {
     if (err) throw err;
     console.log("Database used");
   });
-  fs.readdir("./entities", (err, files) => {
+  fs.readdir("./entities", async (err, files) => {
     if (err) throw err;
     for (let file of files) {
       fs.readFile(`./entities/${file}`, (err, content) => {
@@ -38,6 +38,23 @@ con.connect(function (err) {
           if (err) throw err;
           console.log(`${name} created`);
         });
+        if (name === "admin") {
+          con.query(
+            `insert into admin(name, password, school_id) values('john', '123', 1),('jason', '123', 2)`,
+            function (err, result) {
+              if (err) throw err;
+              console.log(`admin filled`);
+            }
+          );
+          con.query(`select * from admin`, function (err, result) {
+            if (err) throw err;
+            console.log(result);
+          });
+        }
+        // con.query(`describe ${name}`, function (err, result) {
+        //   if (err) throw err;
+        //   console.log(result);
+        // });
       });
     }
   });
