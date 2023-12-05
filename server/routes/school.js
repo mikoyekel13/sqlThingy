@@ -38,10 +38,13 @@ router.post("/", function (req, res, next) {
     con.connect(function (err) {
       if (err) throw err;
       console.log("Connected!");
-      con.query(`select password from admin`, function (err, result) {
+      con.query(`select password, name from admin`, function (err, result) {
         if (err) throw err;
         result.forEach((elem) => {
-          if (elem.password === req.body.password) {
+          if (
+            elem.password === req.body.password &&
+            elem.name === req.body.adminName
+          ) {
             con.query(
               `insert into school (name, school_code) values('${req.body.name}', ${req.body.schoolCode})`,
               function (err, result) {
