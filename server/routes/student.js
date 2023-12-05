@@ -8,7 +8,7 @@ router.get("/", function (req, res, next) {
       host: "localhost",
       user: "root",
       password: "z10mz10m",
-      db: "mydb",
+      database: "mydb",
     });
     con.connect(function (err) {
       if (err) throw err;
@@ -29,7 +29,7 @@ router.get("/:classroom_id", function (req, res, next) {
       host: "localhost",
       user: "root",
       password: "z10mz10m",
-      db: "mydb",
+      database: "mydb",
     });
     con.connect(function (err) {
       if (err) throw err;
@@ -48,18 +48,19 @@ router.get("/:classroom_id", function (req, res, next) {
 });
 
 router.post("/", function (req, res, next) {
+  console.log("hi");
   try {
     const con = mysql.createConnection({
       host: "localhost",
       user: "root",
       password: "z10mz10m",
-      db: "mydb",
+      database: "mydb",
     });
     con.connect(function (err) {
       if (err) throw err;
       console.log("Connected!");
       con.query(
-        `insert into student (name, password, classroom_id) values(${req.body.name}, ${req.body.password}, (${req.body.classId})`,
+        `insert into student (name, password, classroom_id) values('${req.body.name}', '${req.body.password}', ${req.body.classId})`,
         function (err, result) {
           if (err) throw err;
           res.send(result);

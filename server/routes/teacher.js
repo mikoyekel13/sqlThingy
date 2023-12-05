@@ -8,13 +8,13 @@ router.post("/", function (req, res, next) {
       host: "localhost",
       user: "root",
       password: "z10mz10m",
-      db: "mydb",
+      database: "mydb",
     });
     con.connect(function (err) {
       if (err) throw err;
       console.log("Connected!");
       con.query(
-        `insert into teacher (name, password, email) values(${req.body.name}, ${req.body.password}, (${req.body.email})`,
+        `insert into teacher (name, password, email) values('${req.body.name}', '${req.body.password}', '${req.body.email}')`,
         function (err, result) {
           if (err) throw err;
           res.send(result);

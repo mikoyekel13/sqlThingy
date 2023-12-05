@@ -28,6 +28,7 @@ router.get("/", function (req, res, next) {
     });
     fs.readdir("./public/entities", async (err, files) => {
       if (err) throw err;
+      let count = 0;
       for (let file of files) {
         fs.readFile(`./public/entities/${file}`, (err, content) => {
           if (err) throw err;
@@ -60,6 +61,10 @@ router.get("/", function (req, res, next) {
           //   console.log(result);
           // });
         });
+        count += 1;
+        if (count === files.length) {
+          res.send("finished");
+        }
       }
     });
   });
