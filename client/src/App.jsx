@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [student, setStudent] = useState({
@@ -22,6 +22,20 @@ function App() {
     password: "",
   });
 
+  // useEffect(() => {
+  //   try {
+  //     fetch("http://localhost:3000")
+  //       .then((res) => {
+  //         if (!res.ok) throw Error("not ok");
+  //         return res.text();
+  //       })
+  //       .then((res) => console.log(res))
+  //       .catch((e) => console.log(e));
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }, []);
+
   function handleStudent(e) {
     setStudent((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
@@ -29,6 +43,7 @@ function App() {
   }
 
   function postStudent() {
+    console.log(student);
     try {
       fetch("http://localhost:3000/student", {
         method: "POST",
@@ -142,8 +157,8 @@ function App() {
 
   return (
     <>
-      <button onClick={() => handleShow(student)}>show students</button>
-      <button onClick={() => handleShow(school)}>show schools</button>
+      <button onClick={() => handleShow("student")}>show students</button>
+      <button onClick={() => handleShow("school")}>show schools</button>
       <button>other show students that does nothing</button>
 
       <hr />
@@ -168,7 +183,7 @@ function App() {
         onChange={(e) => handleStudent(e)}
         placeholder="classId..."
       />
-      <button onChange={postStudent}>add student</button>
+      <button onClick={postStudent}>add student</button>
       <hr />
       <input
         type="text"
@@ -191,7 +206,7 @@ function App() {
         onChange={(e) => handleTeacher(e)}
         placeholder="email..."
       />
-      <button onChange={postTeacher}>add Teacher</button>
+      <button onClick={postTeacher}>add Teacher</button>
       <hr />
       <input
         type="text"
@@ -214,7 +229,7 @@ function App() {
         onChange={(e) => handleClassroom(e)}
         placeholder="teacher id..."
       />
-      <button onChange={postClassroom}>add Classroom</button>
+      <button onClick={postClassroom}>add Classroom</button>
       <hr />
       <input
         type="text"
@@ -237,7 +252,7 @@ function App() {
         onChange={(e) => handleSchool(e)}
         placeholder="admin password..."
       />
-      <button onChange={postSchool}>add School</button>
+      <button onClick={postSchool}>add School</button>
     </>
   );
 }
