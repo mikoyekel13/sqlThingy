@@ -35,7 +35,7 @@ router.get("/:classroom_id", function (req, res, next) {
       if (err) throw err;
       console.log("Connected!");
       con.query(
-        `select name from student where classroom_id === ${req.params.classroom_id}`,
+        `select name from student where classroom_id = ${req.params.classroom_id}`,
         function (err, result) {
           if (err) throw err;
           res.send(result);

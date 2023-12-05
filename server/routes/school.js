@@ -13,13 +13,10 @@ router.get("/", function (req, res, next) {
     con.connect(function (err) {
       if (err) throw err;
       console.log("Connected!");
-      con.query(
-        `select school.name school_name, admin.name admin_name from school join admin on school.id = admin.school_id`,
-        function (err, result) {
-          if (err) throw err;
-          res.send(result);
-        }
-      );
+      con.query(`select * from school`, function (err, result) {
+        if (err) throw err;
+        res.send(result);
+      });
     });
   } catch (e) {
     res.status(404).send("failed");

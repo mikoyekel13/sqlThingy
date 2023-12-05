@@ -180,10 +180,14 @@ function App() {
     <>
       <button onClick={() => handleShow("student")}>show students</button>
       <button onClick={() => handleShow("school")}>show schools</button>
-      <input type="text" value={classId} onChange={(e) => handleclassId(e)} />
-      <button onClick={() => handleShow("id")}>
-        other show students that does nothing
-      </button>
+      <label htmlFor="classId">show students from class:</label>
+      <input
+        type="text"
+        id="classId"
+        value={classId}
+        onChange={(e) => handleclassId(e)}
+      />
+      <button onClick={() => handleShow("id")}>show</button>
 
       <hr />
       <input
